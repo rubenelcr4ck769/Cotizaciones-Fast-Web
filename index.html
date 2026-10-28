@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cotizador de obra</title>
+<link rel="stylesheet" href="css/styles.css">
+<meta name="theme-color" content="#14262e">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+</head>
+<body>
+<div class="wrap">
+<header><h1>Cotizador de obra</h1><div style="text-align:right"><div class="meta" id="count"></div><div class="meta">Guardado en este dispositivo</div></div></header>
+<div class="tabs" role="tablist">
+<button class="tab" role="tab" id="t-q" aria-selected="true">Cotización</button>
+<button class="tab" role="tab" id="t-m" aria-selected="false">Materiales</button>
+</div>
+
+<section id="v-q">
+<div class="panel">
+<h2>Datos del trabajo</h2>
+<div class="grid">
+<label>Cliente<input id="cli" placeholder="Nombre del cliente"></label>
+<label>Trabajo<input id="job" placeholder="Ej. Instalación de minisplit"></label>
+<label>Fecha<input id="fec" type="date"></label>
+</div>
+</div>
+<div class="panel">
+<h2>Conceptos</h2>
+<div class="row" style="margin-top:0">
+<label style="flex:2;min-width:180px">Material<select id="selM"></select></label>
+<label style="width:90px">Cantidad<input id="selQ" type="number" min="0" step="any" value="1"></label>
+<button class="btn" id="addM">Agregar material</button>
+</div>
+<div class="row">
+<label style="flex:2;min-width:180px">Mano de obra u otro concepto<input id="lab" placeholder="Ej. Mano de obra, traslado"></label>
+<label style="width:130px">Monto<input id="labP" type="number" min="0" step="any" placeholder="0.00"></label>
+<button class="btn ghost" id="addL">Agregar concepto</button>
+</div>
+<div id="lines"></div>
+<div class="totals">
+<div><span>Subtotal</span><span class="num" id="sub"></span></div>
+<div><label style="display:flex;align-items:center;gap:8px">Utilidad %<input id="mar" type="number" min="0" step="any" value="15" style="width:76px;margin:0"></label><span class="num" id="marV"></span></div>
+<div class="grand"><span>Total</span><span class="num" id="tot"></span></div>
+</div>
+<div class="row noprint" style="justify-content:flex-end">
+<button class="btn ghost" id="clr">Nueva cotización</button>
+<button class="btn" id="shr">Compartir PDF</button>
+<button class="btn ghost" id="cpy">Copiar texto</button>
+</div>
+</div>
+</section>
+
+<section id="v-m" hidden>
+<div class="panel">
+<h2 id="mTitle">Agregar material</h2>
+<div class="grid">
+<label>Nombre<input id="mN" placeholder="Ej. Tubo de cobre 3/8"></label>
+<label>Unidad<input id="mU" placeholder="pza, m, kg…"></label>
+<label>Precio por unidad<input id="mP" type="number" min="0" step="any" placeholder="0.00"></label>
+<label>Foto (opcional)<input id="mF" type="file" accept="image/*"></label>
+</div>
+<div class="row">
+<button class="btn" id="mS">Guardar material</button>
+<button class="btn ghost" id="mC" hidden>Cancelar edición</button>
+</div>
+</div>
+<div class="panel">
+<h2>Mis materiales</h2>
+<div id="mList"></div>
+</div>
+</section>
+</div>
+<p class="meta noprint" id="adStatus" hidden style="text-align:center;white-space:pre-line;font-size:12px"></p>
+<p class="meta noprint" style="text-align:center"><button class="btn ghost sm" id="privBtn" hidden>Privacidad y anuncios</button> <a href="privacidad/">Política de privacidad</a></p>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="js/vendor/capacitor.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/state.js"></script>
+<script src="js/materials.js"></script>
+<script src="js/quote.js"></script>
+<script src="js/render.js"></script>
+<script src="js/vendor/jspdf.umd.min.js"></script>
+<script src="js/pdf.js"></script>
+<script src="js/ads-config.js"></script>
+<script src="js/ads.js"></script>
+<script src="js/main.js"></script>
+<script>if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0)navigator.serviceWorker.register("sw.js").catch(function(){});</script>
+</body>
+</html>
